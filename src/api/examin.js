@@ -1,27 +1,18 @@
 import request from '@/utils/request'
 
-// 获取订单列表信息
-export function getOrderList(data) {
+// 获取申请列表
+export function getApplyList(data) {
   return request({
-    url: '/patronus/order/list',
+    url: '/thearchy/merchant/list',
     method: 'post',
     data
   })
 }
 
-// 获取详情
-export function getOrderDetail(data) {
+// 货主申请操作
+export function handelApply(data) {
   return request({
-    url: '/patronus/order/detail',
-    method: 'post',
-    data
-  })
-}
-
-//订单列表导出数据
-export function orderExport(data) {
-  return request({
-    url: '/patronus/order/export',
+    url: '/thearchy/merchant/save',
     method: 'post',
     data
   })

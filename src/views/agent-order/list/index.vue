@@ -53,10 +53,10 @@
             </el-form-item>
           </div>
           <div>
-            <el-form-item label="采购商" prop="username">
+            <el-form-item label="商户名称" prop="shopname">
               <el-input
-                v-model="queryForm.username"
-                placeholder="请输入采购商名称"
+                v-model="queryForm.shopname"
+                placeholder="请输入商户名称"
                 clearable
                 size="small"
                 style="width: 200px"
@@ -145,7 +145,7 @@
         <el-table-column label="订单号" prop="orderno" width="150" show-overflow-tooltip />
         <el-table-column label="创建时间" sortable prop="createtime" width="150" />
         <el-table-column label="订单金额" sortable prop="orderamount" width="130" />
-        <el-table-column label="采购商" prop="username" show-overflow-tooltip />
+        <el-table-column label="商户名称" prop="shopname" show-overflow-tooltip />
         <el-table-column label="数量" prop="cmdtcount" width="60" />
         <el-table-column label="应收款" prop="needprice" width="70" />
         <el-table-column label="实收款" prop="realprice" width="70" />
@@ -199,7 +199,7 @@ export default {
         pageSize: 10,
         tradestate: undefined,
         orderno: undefined,
-        username: undefined,
+        shopname: undefined,
         paytype: undefined,
         ordersource: undefined,
         paystate: undefined,
@@ -281,7 +281,7 @@ export default {
     },
     handleDetail(item) {
       this.$router.push({
-        path: `/query-statistics/agent-pro-qs/${item.orderno}`
+        path: `/agent-order/detail/${item.orderno}`
       });
     },
     handleClick() {
@@ -310,7 +310,9 @@ export default {
         .catch(function() {});
     },
     _initParams(obj) {
-      const { activeName, payDateRange, createDateRange } = this;
+      const activeName = this.activeName;
+      const payDateRange = this.payDateRange || [];
+      const createDateRange = this.createDateRange || [];
       Object.assign(obj, {
         tradestate: activeName === "-1" ? null : activeName,
         paytimestart: payDateRange.length > 0 ? payDateRange[0] : null,
